@@ -1,0 +1,95 @@
+\documentclass[11pt]{article}
+\usepackage{amsthm}% http://ctan.org/pkg/amsthm
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xypic}
+\usepackage{caption}
+\usepackage{hyperref}
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\title{CS70--Fall 2011 --- Solutions to Homework 3}
+\pagestyle{myheadings}
+
+
+\begin{document}
+
+\maketitle
+	
+	\begin{enumerate}
+		\item Strengthening the Proposition\\
+		\textbf{Claim:} For all $n\geq 1$, all entries of the matrix $\left(\begin{array}{cc}1&0\\1&1\end{array}\right)^n$ are bounded above by $n$.\\
+		\textbf{Proof:} by Induction
+		
+		Let $P(n)$ be the proposition $\left(\begin{array}{cc}1&0\\1&1\end{array}\right)^n$. In order to strengthen the proposition, we'll evaluate $P(n)$ for few values of $n$.
+		
+		For $n = 1$ 
+		$$\left(\begin{array}{cc}1&0\\1&1\end{array}\right)^1 = \left(\begin{array}{cc}1&0\\1&1\end{array}\right)$$
+		
+		For $n = 2$ 
+		$$\left(\begin{array}{cc}1&0\\1&1\end{array}\right)^2 = \left(\begin{array}{cc}1&0\\2&1\end{array}\right)$$		
+
+		For $n = 3$ 
+		$$\left(\begin{array}{cc}1&0\\1&1\end{array}\right)^3 = \left(\begin{array}{cc}1&0\\3&1\end{array}\right)$$		
+		
+		A pattern arises as we evaluate $P(n)$ for various values of $n$. Therefore, we can write the above proposition as, 
+		
+		$$\left(\begin{array}{cc}1&0\\1&1\end{array}\right)^n = \left(\begin{array}{cc}1&0\\n&1\end{array}\right)$$				
+		If we are able to prove this, then we have also proved the claim that $\forall n \in N$ all the entries of $P(n)$ are bounded above by $n$.
+		
+		\textbf{Base Case:} For $n = 1$, we have 
+		$$\left(\begin{array}{cc}1&0\\1&1\end{array}\right)^1 = \left(\begin{array}{cc}1&0\\1&1\end{array}\right) \text{  \cmark}$$
+		
+		\textbf{Inductive Step:} Suppose that $P(n)$ is true. Therefore $P(n + 1)$ becomes 
+		
+		$$\left(\begin{array}{cc}1&0\\1&1\end{array}\right)^{n+1} = \left(\begin{array}{cc}1&0\\1&1\end{array}\right)^n \cdot \left(\begin{array}{cc}1&0\\1&1\end{array}\right) $$
+		
+		As we know that $P(n)$ is true. Therefore, 
+		
+		$$\left(\begin{array}{cc}1&0\\1&1\end{array}\right)^{n+1} = \left(\begin{array}{cc}1&0\\n&1\end{array}\right) \cdot \left(\begin{array}{cc}1&0\\1&1\end{array}\right) = \left(\begin{array}{cc}1&0\\{n+1}&1\end{array}\right) \textbf{  \cmark}$$		\\
+		
+		\item Principle of Induction
+		
+			\begin{enumerate}
+					
+				\item $(\forall n \in \mathbb{N} ) (P(n))$. \\
+				\textbf{Possibly True.} In order for the proposition $P(n)$ to be true, there must be a base case. As there is no base case here, it is not possible for us to say that's its true. Also there is no reason for us to say that its false.  
+
+				\item $(\forall n \in N ) (\neg P(n))$. \\
+				\textbf{Possibly True.} In order for the proposition $\neg P(n)$ to be true, there must be a base case. As there is no base case here, it is not possible for us to say that's its true. Also there is no reason for us to say that its false. 
+
+				\item $P(0) \implies (\forall n \in N ) (P(n+2))$.\\
+				\textbf{Possibly True.} This statement is also partially true. The above proposition is true for even numbers. However, it says nothing about odd numbers whatsoever. Therefore, we can't make any conclusion. 
+
+				\item $(P(0) \land P(1)) \implies (\forall n \in N ) (P(n))$.\\
+				\textbf{Definitely True.} The first base case $P(0)$ shows that the proposition is true for all even numbers, while the second base case $P(1)$ shows that the proposition is true for all odd numbers. Because the proposition is true for all even numbers and all odd numbers, we can say that the proposition is true $\forall n \in N$.  
+
+				\item $(\forall n \in N) P(n) \implies ((\exists m \in N ) (m>n+2011 \land P(m)))$.\\
+				\textbf{Definitely True.} As given in the problem statement, we know that $P(n) \implies P(k) \text{  } \forall k > n$ is true, if $k$ has the same parity(evenness or oddness) as $n$. Here, for any given value of $n$, there is always a $m > n + 2011$ with the same parity as $n$. Therefore, the statement is true. 
+					
+				\item $(\forall n \in N) (n<2011 \implies P(n))\land (\forall n \in N ) (n\ge 2011 \implies \neg P(n))$.\\
+				\textbf{Definitely False.} Consider only the first half of the proposition, then we have base cases for both parities(evenness and oddness), and thus that part of the proposition is true. However, this contradicts the latter half of this proposition, and we know that $T \land F$ is $false$. Therefore, this statement is always false.  
+
+			\end{enumerate}
+			
+		\item The Proof of the Pi is in the Eating\\
+		{\bf Claim:} Dave can always, via some sequence of moves, arrange the pizzas in order of size.\\
+		{\bf Proof:} This is possible. 
+		
+			\begin{enumerate}
+				\item Search for the largest pizza in the stack. 
+				\item Place the spatula under this pizza and flip. After this, you will have the largest pizza at the top of stack. 
+				\item Place the spatula under the bottom pizza and flip. After this, you will have the largest pizza box at the bottom of the stack. 
+				\item Do the same process for the second largest pizza, but instead of flipping from the bottom pizza, you flip from the pizza above it. 
+				\item Repeat this process for $n$ iterations in order to sort $n$ pizza's. 
+			\end{enumerate} 
+
+		
+	\end{enumerate}
+	
+\end{document}
