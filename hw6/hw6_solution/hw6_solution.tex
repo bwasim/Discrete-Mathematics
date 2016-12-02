@@ -1,0 +1,192 @@
+\documentclass[11pt]{article}
+\usepackage{amsthm}% http://ctan.org/pkg/amsthm
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xypic}
+\usepackage{caption}
+\usepackage{hyperref} 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=c++,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\hypersetup{
+	colorlinks   = true,
+	citecolor    = gray
+}
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+%%% - The heading
+\title{CS70--Fall 2011 --- Solutions to Homework 6}
+\pagestyle{myheadings}
+
+%%% - Don't show the Date
+\date{}
+%%% - Don't show the Page numbers
+\pagenumbering{gobble}
+
+\begin{document}
+	\maketitle
+	
+	%%% A small note 
+	Note that whenever you're dealing with counting problems, you need to answer two important questions. 
+	\begin{enumerate}
+		\item  Does Order Matter?
+		\item  Is Repetition Allowed?
+	\end{enumerate}
+	
+	You may want to create a simple tree to visualize such a thing, with the leaves representing how counting works in each particular scenario. If the idea of permutations vs combinations bugs you, you might want to look  \href{https://www.mathsisfun.com/combinatorics/combinations-permutations.html}{here} for a very intuitive explanation.
+	
+	%%% Another small note 
+	Another important point. Anagrams are formed by reshuffling the characters of the same word. So that means that \textit{angel} and \textit{glean} are anagrams of one another. In order to calculate the anagrams of a word, we simply take the factorial of the number of digits of the word($5!$ in the above case) and divide it by the product of factorials of count of all characters($1!$ in the above case).
+	
+	%%% Another one
+	Before solving problems related to Fermat's theorem, it is better to develop a visual understanding of the idea, rather than to be thinking in terms of abstract mathematics. \href{https://www.youtube.com/watch?v=XPMzosLWGHo}{This} video might help you in this regard. 
+	
+	%%% Begin enumeration for the Questions 
+	\begin{enumerate}
+		
+		%%% 1- Begin Q1
+		\item \textbf{This problem counts more than the rest.}
+			
+			%%% 1- Enumeration for the sub-parts of this problem. 
+			\begin{enumerate}
+				\item Answering the above mentioned questions
+					\begin{enumerate}
+						\item No, order doesn't matter here. Why? 
+						\item No, repetition is not allowed. Why?
+					\end{enumerate}  
+				Therefore, the answer is $\comb{13}{5}$ \\
+				\item $2^{54}$. Although there are other ways to solve this problem, but the most obvious way is to ask this question, `How many 55-bit strings are there that contain more zeros than ones?'. As you might have figured out(because this is an odd-length bit-string), that this number must be equal to the number of bit-strings with more ones than zeros. So there intersection gives the complete set for 55-bit string. Thus $\frac{2^{55}}{2}$ is the answer. 
+				\item $\comb{52}{13}$. Because we have to select $13$ cards from a total of $52$. 
+				\item $\comb{48}{13}$. Because total number of cards are $52$, and there are $4$ aces.
+				\item We have to select $13$ cards in total. Because we have to select $4$ aces, this means that the possible cards to select are reduced to $9$, with the deck of cards reduced to $48$(because aces are already selected). So, answer is $\comb{48}{9}$.
+				\item 
+					\begin{enumerate}
+						\item Selecting exactly five spades = $\comb{13}{5}$
+						\item Selecting remaining eight cards = $\comb{39}{8}$
+					\end{enumerate}
+				So, $\comb{13}{5} \cdot \comb{39}{8}$ is the answer. 
+				\item Any guesses people? No? Okay. $52!$. Convince yourself that this is correct. 
+				\item Simple answer: $104!$ but it is incorrect, because each card occurs twice in the new deck. So the correct answer would be $\frac{104!}{2^{52}}$
+				\item Anagrams = $ \frac{8!}{2!} $
+				\item Anagrams = $ \frac{6!}{3!} $ 
+				\item Anagrams = $ \frac{9!}{2!} $
+				\item Anagrams = $ \frac{11!}{4! 4! 2!} $
+				\item $24^8$. One way to think about it is if you are dealing with binary numbers(either black or white ball) and you have a $10$ bit string($10$ bins to put the balls in). Then the total possible distributions are $2^{10}$. Same in this case(with different number of balls and bins of course).
+				\item This is the number of ways to assign to each bin a number of balls, such that the total number among all the bins is $8$. This can be thought of as the number of ways to insert $24 - 1 = 23$ dividers among the $8$ balls; in other words, to select, out of $23 + 8 = 31$ slots total, for $23$ of the slots to be dividers and for $8$ to be balls. Thus, the answer is $\comb{31}{23} = \comb{31}{8}$
+				\item Supposing each bin were already filled with $1$ ball, as we know it must be, the rest of the assignment amounts to distributing the surplus $3$ balls among the $5$ bins. By the same reasoning as above, the number of ways to distribute $3$ balls among $5$ bins is equal to the number of ways to choose, out of $3 + (5 - 1) = 7$ slots, for $3$ to be balls and $5 - 1$ to be dividers. Thus, the answer is $\comb{7}{3} = \comb{7}{4}$.
+				\item $29 \cdot 27 \cdot 25 \cdots 3 \cdot 1$. Why? Suppose the students were all assigned numbers, from $1$ through
+				$30$. We can make a pair in the following way: First, specify who student $1$ is paired with. Then remove those two from all future consideration. Then, specify who the next lowest student (who is neither student $1$ nor student $1$’s partner) is paired with and remove those from all future consideration. Then specify who the next lowest student (who is not among the so far mentioned) is paired with and so forth. This gives us $29$ choices in the first stage, then $27$ choice in the second stage, then $25$ choices in the third stage, down to 1 choice at the thirtieth stage.
+			\end{enumerate}
+			
+			
+		%%% 1- End Q1
+		
+		%%% 2- Begin Q2
+		\item \textbf{Fermat's theorem.} \\ 
+			
+			%%% 2- Enumeration for the sub-parts of this problem. 
+			\begin{enumerate}
+				\item Because there are $k$ colors and $p$ beads, there are a total of $k^p$ possible combinations. Moreover, we're told that beads with singleton color isn't allowed. So, possible combinations are limited to $k^p - k$(because there are $k$ beads with the same color).
+				\item Let an arbitrary necklace be given. Let $x$ be the smallest positive integer such that rotating the necklace by $x$ many positions causes it to look the same (equivalently, the number of distinct sequences
+				which can be read off the necklace (clockwise, say), depending on where one starts reading from), and let $m$ be the smallest multiple of $x$ which is at least as big as $p$. Note that rotating the necklace by $m$ many positions must cause it to look the same (since this is
+				just the same as repeatedly rotating by $x$ many positions). But rotation by $m$ many positions is just the same as rotation by $m−p$ many positions (as the necklace has length $p$). Thus, rotation by $m − p$ many positions causes the necklace to look the same. But $0 \le m−p < x$. Since $x$ was the smallest positive integer such that
+				rotation by $x$ left the necklace looking the same, we can conclude $m − p$ is not positive, and thus, $m − p = 0$. That is to say, $x$ must divide $p$. As $p$ is prime, this means $x$ is either $1$ or $p$. In the former case, the necklace consists of just $1$ color; in the latter
+				case, there are $p$ distinct sequences which can form this particular necklace. \\
+				Thus, out of the necklaces which do not consist of just $1$ color, each can be made from precisely $p$ distinct sequences which do not consist of just $1$ color. Accordingly, the number of such necklaces
+				is precisely $\frac{1}{p}$ times the number of such sequences. That is, the number of such necklaces is $\frac{k^p−k}{p}$.
+				\item  We already know that $\frac{k^p - k}{p}$ must be an integer. So this means that 
+				$$p \vert (k^p - k)$$
+				$$p \vert k(k^{p-1} - 1)$$
+				If $p$ doesn't divide $k$, then $p$ must divide $(k^{p-1} - 1)$. So $$k^{p-1} \equiv 1 (\text{mod } p)$$
+			\end{enumerate}
+		
+		
+		%%% 2- End Q2
+		
+		
+		%%% 3- Begin Q3
+		\item \textbf{I've got another riddle for you.}
+		
+			%%% 3- Enumeration for the sub-parts of this problem. 
+			\begin{enumerate}
+				\item Because each of the possibilities are equally likely, the number of ways a customer can choose $5$ chocolate bars from $100$ is $$ \comb{100}{5}  $$
+				Because this customer is unlucky, he gets none of the golden tickets. All he gets are $5$ chocolate bars from the $90$ bars with no tickets, giving $$ \comb{90}{5} $$
+				Therefore, the probability of not receiving any tickets to the chocolate factory is 
+				$$ \frac{\comb{90}{5}}{\comb{100}{5}}$$
+				
+				\item This isn't really much different from part(a). Because we want to calculate the probability of receiving exactly $1$ golden ticket. This means that we would be choosing $4$ chocolates from $90$(the ones which have no golden tickets), and $1$ from $10$(the ones which have golden tickets). Therefore, the total probability of getting exactly $1$ golden ticket is 
+				$$ \frac{\comb{90}{4} \cdot \comb{10}{1}}{\comb{100}{5}}$$
+				
+				\item Whats the difference between receiving no tickets at all(part a), and receiving at least $1$ ticket(part c). Well the latter is simply the negation of the former. Therefore, the probability of receiving at least $1$ golden ticket is 
+				$$ 1 - \frac{\comb{90}{5}}{\comb{100}{5}}$$
+			\end{enumerate}
+		
+		
+		%%% 3- End Q3
+		
+		%%% 4- Begin Q4
+		\item \textbf{A good bet?} \\
+		When you roll a die $n$ times, the total number of possibilities are $6^n$. So with $n = 6$, the total number of possibilities are $6^6$. In fact, there are $2$ ways to generate four distinct numbers. 
+			%%% The ways 
+			\begin{enumerate}
+				\item Firstly it might be the case that a single distinct number appears three times, and three other numbers(also distinct) appear only once. If this is the case, then we have the following facts. 
+					\begin{enumerate}
+						\item Because one number appears three times, its probability is $\comb{6}{1}$.
+						\item We have three numbers, all of which appear once. The probability of this is $\comb{5}{3}$.
+						\item Moreover it must be remembered that a roll [1, 2, 3, 6, 6, 6] and [6, 2, 3, 6, 1, 6] are different. Therefore, we have to count the choices there are for which three of the six dice will show the tripled(same number three times) number. This is $\comb{6}{3}$. 
+						\item Plus we have a $3!$ which is how many choices there are for which of the three remaining dice will show which of the three non-tripled numbers
+					\end{enumerate} 
+				So, in total the probability of the first possibility is 
+				$$ \comb{6}{1} \cdot \comb{5}{3} \cdot \comb{6}{3} \cdot 3! $$
+				\item Secondly it might be the case that two distinct numbers appear twice, and two other numbers(also distinct) appear only once. If this is the case, then we have the following facts. 
+					\begin{enumerate}
+						\item On $6$ dice throws, the probability that two same number would appear twice is $\comb{6}{2}$.
+						\item On $6$ dice throws, the probability that we will have two distinct numbers is $\comb{4}{2}$. This is because we have already had two numbers appear twice. Therefore, our choice is restricted to $4$, rather than to $6$. 
+						\item Also, $\comb{6}{2}$ is how many choices there are for which of the six dice will show
+						the lower doubled number; and another $\comb{4}{2}$ is how many choices there are for which of the four remaining dice will show the higher doubled
+						number; and the $2!$ is how many choices there are for which of the two remaining dice will show which of the two non-doubled numbers.
+					\end{enumerate}
+			So, in total the probability of the second possibility is 
+									$$ \comb{6}{2} \cdot \comb{4}{2} \cdot \comb{6}{2} \cdot \comb{4}{2} \cdot 2! $$
+			\end{enumerate}
+		
+		So the probability of winning any round is 
+		$$ \frac{\comb{6}{1} \cdot \comb{5}{3} \cdot \comb{6}{3} \cdot 3! + \comb{6}{2} \cdot \comb{4}{2} \cdot \comb{6}{2} \cdot \comb{4}{2} \cdot 2!}{6^6}  $$
+		which is roughly $0.5015$. So over the course of $1000$ rounds, you'll win more games than her, and so you should go ahead and play the game. 
+
+		%%% 4- End Q4
+		
+	%%% End enumeration for the Questions
+	\end{enumerate}
+	
+	
+\end{document}
