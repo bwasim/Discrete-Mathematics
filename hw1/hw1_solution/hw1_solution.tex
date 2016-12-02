@@ -1,0 +1,279 @@
+\documentclass[11pt]{article}
+\usepackage{array}% http://ctan.org/pkg/array
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+
+\def\Name{PUT SOMETHING HERE}  % Your name
+\def\Sec{PUT SOMETHING HERE}  % Your discussion section
+
+\title{CS70--Fall 2011 --- Solutions to Homework 1}
+\pagestyle{myheadings}
+
+\begin{document}
+	\maketitle
+	\newlength{\mylen}\settowidth{\mylen}{$p \to q \to r$}% Widest element
+	
+	Before proceeding, let me remind you that given propositions $p$ and $q$, the implication $p \rightarrow q$ is given as
+	
+	\begin{table}[h!]
+		\centering
+		\caption{Implication}
+		\begin{tabular}{*{3}{>{\centering\arraybackslash}m{\mylen}}}
+			\toprule
+			$p$ & $q$ & $p \rightarrow q$ \\ 
+			\midrule
+			T & T & T \\
+			T & F & F \\
+			F & T & T \\
+			F & F & T \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\begin{enumerate}
+		\item \textbf{Implications}
+		
+		\begin{enumerate}	
+			\item If $3 + 4 = 5$ then $3^2 + 4^2 = 5^2$.
+			\\
+			\textbf{True}. Because $false \rightarrow anything$ is true, as evident from Table 1.  \\
+			
+			\item If $3 + 4 = 7$ then $3^2 + 4^2 = 5^2$.
+			\\
+			\textbf{True}. Because $true \rightarrow true$ is true. \\
+			
+			\item If $3 + 4 = 5$ then $3^2 + 4^2 = 7^2$.
+			\\
+			\textbf{True}. Because $false \rightarrow anything$ is true.\\
+			
+			\item If $3 + 4 = 7$ then $3^2 + 4^2 = 7^2$.
+			\\
+			\textbf{False}. Because $true \rightarrow false$ is false.\\
+			
+			\item If any of this semester's CS 70 students are award-wining violinists, then $1 + 1 = 2$.
+			\\
+			\textbf{True}. We cannot say anything about CS 70 students being award-winning violinists, but we're pretty sure that $1 + 1 = 2$. Therefore, we have $anything \rightarrow true$ which is always true, as evident from Table 1.\\
+			
+			\item If Los Angeles is the state capital of California, then the trillionth digit of $\pi$ is $7$.
+			\\ 
+			\textbf{True}. We know that Los Angeles is not the capital of California. Therefore, we have $false \rightarrow anything$, which is always true, as in Table 1.\\
+			
+		\end{enumerate}
+		
+		\item \textbf{If you show up on time, you won’t have to work this hard!}
+		
+		\begin{enumerate}
+			\item Do you have enough information to deduce the truth value of $p$? If yes, what is the truth value of $p$?\\	
+			\textbf{Yes}. The truth table of $p \rightarrow \lnot p$ is given below, 
+			\begin{table}[h!]
+				\centering
+				\label{my-label}
+				\begin{tabular}{*{3}{>{\centering\arraybackslash}m{\mylen}}}
+					\toprule
+					$p$ & $\lnot p$ & $p \rightarrow \lnot p$ \\
+					\midrule
+					T & F       & F                     \\
+					F & T       & T                    	\\
+					\bottomrule
+				\end{tabular}
+			\end{table}
+			
+			As $p \rightarrow \lnot p$ is true. So, it must be the fact that $p$ is false. \\
+			
+			\item Do you have enough information to deduce the truth value of $q$? If yes, what is the truth value of $q$?\\
+			\textbf{No}. We are told that $q \rightarrow r$ is true. The truth table of $q \rightarrow r$ is, 
+			
+			\begin{table}[h!]
+				\centering
+				\begin{tabular}{*{3}{>{\centering\arraybackslash}m{\mylen}}}
+					\toprule
+					$q$ & $r$ & $q \rightarrow r$ \\ 
+					\midrule
+					T & T & T \\
+					T & F & F \\
+					F & T & T \\
+					F & F & T \\
+					\bottomrule
+				\end{tabular}
+			\end{table}
+			
+			From this truth table, we aren't able to deduce any information about what $q$ and $r$ should be. However, we're also told that $p \lor q \lor \lnot r$ is true. This directly implies that both $q$ and $r$ must be same, either both are true or false. \\
+			
+			\item David asks the class whether $(\neg q \land r) \lor (q \land \neg r)$ true. Do you have enough information to deduce the truth value of this proposition? If yes, what is its truth value?\\
+			\textbf{Yes}. As we know that both $q$ and $r$ are same. So, assume that both $q$ and $r$ are true. This means, 
+			$$(\neg q \land r) \lor (q \land \neg r)$$\\ becomes
+			$$(F \land T) \lor (T \land F)$$ which is false.  Contrary to this, assume that both $q$ and $r$ are false. This would mean, 
+			$$(T \land F) \lor (F \land T)$$ which is also false. So, we conclude that $(\neg q \land r) \lor (q \land \neg r)$ is false. 
+			
+		\end{enumerate}
+		
+		\item \textbf{Practice with quantifiers}
+		
+		\begin{enumerate}
+			
+			\item $(\forall x \in N)(x^2 < 9) \rightarrow (\forall x \in N)(x^2 < 10) $
+			
+			\textbf{True}. Because $(\forall x \in N)(x^2 < 9)$ is false, and $false \rightarrow anything$ is true. \\
+			
+			\item $(\forall x \in N)(x^2 < 10) \rightarrow (\forall x \in N)(x^2 < 9) $
+			
+			\textbf{True}. Because $(\forall x \in N)(x^2 < 10)$ is false, and $false \rightarrow anything$ is true.\\
+			
+			\item $(\forall x \in N)(x^2 < 9 \rightarrow x^2 < 10) $
+			
+			\textbf{True}. Let $P(x)$ be the proposition $x^2 < 9$, and $Q(x)$ be the proposition $x^2 < 10$. There are two cases to consider. \\
+			\begin{enumerate}
+				\item When $P(x)$ is false. Because $false \rightarrow anything$ is true, whenever $P(x)$ is false, $(\forall x \in N)(x^2 < 9 \rightarrow x^2 < 10) $ will be true. 
+				
+				\item When $P(x)$ is true. Note that $P(x)$ is true, only for $x < 3$, and under this condition $Q(x)$ is true as well. So $(\forall x \in N)(x^2 < 9 \rightarrow x^2 < 10) $ will be true, because $true \rightarrow true$ is always true. 
+			\end{enumerate}
+			
+			
+			\item $(\forall x \in N)(x^2 < 10 \rightarrow x^2 < 9) $
+			
+			\textbf{False}. Let $P(x)$ be the proposition $x^2 < 10$, and $Q(x)$ be the proposition $x^2 < 9$. There are two cases to consider.\\
+			
+			\begin{enumerate}
+				\item When $P(x)$ is false. Because $false \rightarrow anything$ is true, whenever $P(x)$ is false, $(\forall x \in N)(x^2 < 10 \rightarrow x^2 < 9) $ will be true. 
+				
+				\item When $P(x)$ is true. Note that $P(x)$ is true, only for $x \le 3$, and under this condition $Q(x)$ is false(for $x = 3$, because $9 < 9$ is $false$). So $(\forall x \in N)(x^2 < 9 \rightarrow x^2 < 10) $ will be false, because $true \rightarrow false$ is false. 
+			\end{enumerate}
+			
+			
+			\item $(\forall x \in N)(\exists y \in N)(x^2 < y)$
+			
+			\textbf{True}. Just let $y = x^2 + 1$ to make the proposition true for any arbitrary $x$. \\
+			
+			\item $(\exists y \in N)(\forall x \in N)(x^2 < y)$
+			
+			\textbf{False}. You can't do what we did in part(e), because in this case you have to choose $y$ before you iterate on $x$, and when $x \ge \sqrt{y}$ the proposition becomes false. \\
+			
+			\item $(\forall x \in N)(\exists y \in N) (x^2 < y \rightarrow x < y)$
+			
+			\textbf{True}. Let $P(x, y) = (x^2 < y)$ and $Q(x, y) = (x < y)$. We have to show that $$P(x, y) \rightarrow Q(x, y)$$ is true. If we simply choose $y = x^2 + 1$, then $P(x, y)$ will always be true, which means that $Q(x, y)$ is true as well, because if $$x^2 < y$$ is true, then we know that $$x < y$$
+			is true as well. So the proposition is of the form $true \rightarrow true$ which is true. 
+			
+			\item $(\exists y \in N)(\forall x \in N) (x^2 < y \rightarrow x < y)$
+			
+			\textbf{True}. Let $P(x, y) = (x^2 < y)$ and $Q(x, y) = (x < y)$. We have to show that $$P(x, y) \rightarrow Q(x, y)$$ is true. From part(f), we know that $P(x, y)$ is false. Because $false \rightarrow anything$ is true. Thus, the statement is true. \\
+			
+			\item $(\forall x \in N)(\exists y \in N) (x < y \rightarrow x^2 < y)$
+			
+			\textbf{True}. Choose $y = x^2 + 1$. This will make that statement of the form, $true \rightarrow true$, which is true. \\
+			
+			\item $(\exists y \in N)(\forall x \in N) (x < y \rightarrow x^2 < y)$
+			
+			\textbf{True}. Let $P(x, y) = (x < y)$ and $Q(x, y) = (x^2 < y)$. Given whatever $y$, for $x \ge y + 1$, $P(x, y)$ becomes false, which means that it doesn't hold for arbitrary $x$. Because $P(x, y)$ becomes false, the implication will become true. \\
+			
+			
+		\end{enumerate}
+	
+		\item \textbf{Grade these answers}. 
+		
+		\begin{enumerate}
+			
+			\item \textbf{Exam question}: Is the following proposition true? $2\pi < 100 \rightarrow \pi < 50$. Explain your answer.
+			
+			\textbf{Student answer}: Yes. $2\pi = 6.283...$, which is less than $100$. Also $\pi = 3.1459...$ is less than $50$.
+			Therefore the proposition is of the form $True \rightarrow True$, which is $true$.\\
+			
+			\textbf{Grade}: A. \\The answer along with the reasoning are correct. \\
+			
+			\item \textbf{Exam question}: Is the following proposition true? $2\pi < 100 \rightarrow \pi < 50$. Explain your answer.
+			
+			\textbf{Student answer}: Yes. If $2\pi < 100$, then dividing both sides by two, we see that $\pi < 50$. \\
+			
+			\textbf{Grade}: A/D. \\ However, in my opinion, although the answer is correct, the student fails to logically explain why. So I would give him a \textbf{D}. \\
+			
+			\item \textbf{Exam question}: Is the following proposition true? $2\pi < 100 \rightarrow \pi < 49.$ Explain your answer.
+			
+			\textbf{Student answer}: No. If $2\pi < 100$, then dividing both sides by two, we see that $\pi < 50$, which does
+			not imply $\pi < 49$.\\
+			
+			\textbf{Grade}: F. \\The answer is incorrect. \\
+			
+			\item \textbf{Exam question}: Is the following proposition true? $\pi^2 < 5 \rightarrow \pi < 5$. Explain your answer.
+			
+			\textbf{Student answer}: No, it is false. $\pi^2 = 9.87...$, which is not less than $5$, so the premise is false. You
+			can’t start from a faulty premise.\\
+			
+			\textbf{Grade}: F. \\The answer is incorrect. You \textbf{can} start with a faulty premise. \\
+			
+		\end{enumerate}	
+		
+		\item \textbf{Liars and Truthtellers}
+		
+		\begin{enumerate}
+			
+			\item You meet a very attractive local and ask him/her on a date. The local responds, “I will go on a date
+			with you if and only if I am a Truthteller.” Is this good news? Explain your answer with reference to
+			logical notation.\\
+			\textbf{Yes}. Let $p$ be the proposition ``I will go on a date with you" and $q$ be the proposition ``I am a Truthteller". Thus, we can write the question logically as $p \iff q$, whose truth table follows
+			
+			\begin{table}[h!]
+				\centering
+				\begin{tabular}{*{3}{>{\centering\arraybackslash}m{\mylen}}}
+					\toprule
+					$p$ & $q$ & $p \iff q$ \\ 
+					\midrule
+					T & T & T \\
+					T & F & F \\
+					F & T & F \\
+					F & F & T \\
+					\bottomrule
+				\end{tabular}
+			\end{table}
+			
+			\begin{enumerate}
+				
+				\item In the case of the truth teller, the statement is true. Therefore you will surely get a date. 
+				
+				\item In the case of the liar, the statement is $false$. Moreover, we know that $q$ is $false$ as we are talking to a liar. This means that $p$ has to be true, as in the truth table. So we will get a date in this case as well.  
+				
+			\end{enumerate} 
+			
+			\item You are trying to find your way to the lagoon and encounter a local inhabitant on the road. Which of
+			the following questions could you ask him in order to reliably deduce whether you are on the correct
+			path? In each case, explain your answer with reference to logical notation.\\
+			
+			\begin{enumerate} 
+				
+				
+				\item If I were to ask you ``If this is the way to the lagoon, what would you say?”\\ 
+				
+				\textbf{Yes}. There are two possibilities.  
+				\begin{enumerate}
+					\item If I'm talking to a truth teller, and he says Yes, then I can believe him and take that way to the lagoon. On the other hand, if he says No, I can believe him as well and go the opposite direction. 
+					
+					\item If I'm talking to a liar, and he says Yes, that means that if you had asked the question, he would've said No which is a lie. So it means that this is the way to the lagoon and you can trust a liar as well. Similarly if he replies with No, he is telling you the truth.  
+				\end{enumerate}
+
+				\item If I were to ask you, “If this is the way to the lagoon and you say “yes”, can I believe you?”\\
+				\textbf{No}. Truth teller, would say “Yes”. If a liar, the liar would lie (but being a perfect logician knows that you can trust his answer), and say “No”. This allows you to figure out whether the person is a liar or truth teller, but does not help you find the way to the lagoon.\\
+				
+				\item If I were to ask somebody of the other type than yours, “If this is the way to the lagoon, what would that person say?”\\
+				\textbf{Yes}. Again there are two possibilities. 
+				\begin{enumerate}
+					\item Because the truth teller always tells the truth, his answer would be that of a liar. If he says Yes, it means that this is not the way to lagoon. If he says No, it means that this is the way to the lagoon. So you can take the opposite of the answer to be true. 
+					\item Because the liar always lies, his answer would also be that of a liar because he wants to prove that he's a truth teller. So you can take the opposite of this answer to be true as well. 
+					
+					Generally, you can take the opposite of the answer to be true, and you get to know the way to the lagoon.
+					
+				\end{enumerate}
+				
+				\item “Is at least one of the following true? You are a Liar and this is the way to the lagoon; or you are a Truthteller and this is not the way to the lagoon.”\\
+				\textbf{Yes}. Two possibilities. 
+				\begin{enumerate}
+					\item If a truth teller, and he says Yes, this means that this is not the way to the lagoon, and if he says No, that means that this is the way to the lagoon. 
+					\item If a liar, and he says Yes, because he's a liar, this also means that this is not the way to the lagoon, and if he says No, this means that this is the way to the lagoon. 
+					
+					Generally, you can take the opposite of the answer to be true, and you get to know the way to the lagoon.
+				\end{enumerate}
+				
+			\end{enumerate}	
+			
+		\end{enumerate}
+		
+		
+	\end{enumerate}
+	
+\end{document}
