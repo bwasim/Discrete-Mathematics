@@ -1,0 +1,336 @@
+% Search for all the places that say "PUT SOMETHING HERE".
+
+\documentclass[11pt]{article}
+\usepackage{amsthm}% http://ctan.org/pkg/amsthm
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xypic}
+\usepackage{caption}
+\usepackage{hyperref} 
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\title{CS70--Fall 2011 --- Solutions to Homework 2}
+
+\begin{document}
+	\maketitle
+	
+	\begin{enumerate}
+		\item Practice Proving Propositions
+		
+		\begin{enumerate}
+			\item \textbf{Claim:} For all natural numbers $n$, if $n$ is even then $n^2+2011$ is odd.
+			
+			\textbf{Proof:} \textit{by Induction} \\
+			Let $$ \tab P(n) = n^2+2011 \tab \forall n \in N$$
+			
+			\textbf{Base Case:} 
+			
+			$$P(0) = 0^2 + 2011 = 2011$$
+			
+			which is odd. So the base case is true.\\
+			
+			\textbf{Inductive Step:}
+			
+			Assume $P(n)$ is true. Taking $P(n+2)$
+			
+			$$P(n+2) = (n+2)^2+2011$$  
+			$$P(n+2) = n^2 + 4n + 2015$$ 
+						
+			Take $K(q) = q^2 + 4q + 2015$. There is only one possibility 
+			\begin{enumerate} 
+							
+				\item $q$ is even. If $q$ is even, $q^2$ is also even. Moreover $4q$ becomes even. So we have
+				$$K(q) = Even + Even + Odd $$ 
+				$$K(q) = Even + Odd $$ 
+				$$K(q) = Odd \text{ \cmark}$$ 
+							
+			\end{enumerate}
+			
+			So, $P(n+2) = n^2 + 4n + 2015$ is odd. So, $P(n) \rightarrow P(n+2)$ is true. The claim is correct. \cmark \\
+		
+			\item \textbf{Claim:} For all natural numbers $n$, $n^2+5n+1$ is odd.
+			
+			\textbf{Proof:} \textit{by Induction} \\
+			Let $$ \tab P(n) = n^2+5n+1 \tab \forall n \in N$$
+			
+			\textbf{Base Case:} 
+			
+			$$P(0) = 0^2 + 5(0) + 1 = 1$$
+			
+			which is odd. So the base case is true.\\
+			
+			\textbf{Inductive Step:}
+			
+			Assume $P(n)$ is true. Taking $P(n+1)$
+			
+			$$P(n+1) = (n+1)^2 + 5(n+1) + 1$$  
+			$$P(n+1) = n^2 + 7n + 7$$ 
+			
+			Take $K(q) = q^2 + 7q + 7$. There are two possibilities 
+			\begin{enumerate}
+				\item $q$ is odd. If $q$ is odd, $q^2$ is also odd. Morever $7q$ becomes odd. So we have
+				$$K(q) = Odd + Odd + Odd $$ 
+				\textbf{Axiom}: Adding an Odd number with an Odd number gives an even number.
+				$$K(q) = Even + Odd $$ 
+				\textbf{Axiom}: Adding an Even number with an Odd number gives an Odd number.
+				$$K(q) = Odd \text{ \cmark}$$ 
+				
+				\item $q$ is even. If $q$ is even, $q^2$ is also even. Moreover $7q$ becomes even. So we have
+				$$K(q) = Even + Even + Odd $$ 
+				$$K(q) = Even + Odd $$ 
+				$$K(q) = Odd \text{ \cmark}$$ 
+				
+			\end{enumerate}
+			
+			
+			So, $P(n+1) = n^2 + 7n + 7$ is odd. So, $P(n) \rightarrow P(n+1)$ is true. The claim is correct. \cmark \\
+			
+			
+			\item \textbf{Claim:} For all real numbers $a,b$, if $a+b\ge 2011$ then $a > 1005$ or $b > 1005$.
+			
+			\textbf{Proof:} \textit{Direct Proof}
+			
+			Let $$P(a, b) = (a+b\ge 2011)$$ and $$Q(a, b) = (a > 1005 \text{ or } b > 1005)$$
+			
+			We have to prove that $P(a, b) \rightarrow Q(a, b)$ is true. Just take $a$ to be 1005, therefore for the implication to be true $b$ has to be greater than 1005, because otherwise $Q(a, b)$ will be false, and so will the implication. 
+			
+			$$a + b \ge 2011$$
+			$$1005 + b \ge 2011$$
+			$$b \ge 1006 $$ 
+			$$b > 1005 $$ which implies that $Q(a, b)$ is true. \cmark
+			
+			\item \textbf{Claim:} For all real numbers $r$, if $r$ is irrational then $r/4$ is irrational.
+			
+			\textbf{Proof:}  \textit{by Contraposition}
+			
+			Let $P(r)$ be the statement that $r$ is irrational, and $Q(r)$ be the statement that $r/4$ is irrational. Thus, we have to prove $$P(r) \rightarrow Q(r)$$ By Contraposition, $$\lnot Q(r) \rightarrow \lnot P(r)$$.
+			
+			Let $X(r)$ be the proposition that $r/4$ is rational, and $Y(r)$ be the proposition that $r$ is rational. So we have to prove, $$X(r) \rightarrow Y(r)$$ 
+			
+			Given that $r/4$ is a rational number, we have 
+			\[ \left(\frac{r}{4}\right) = \left(\frac{p}{q}\right) \]
+			
+			where $p, q \in Z$
+			
+			\[ r = \left(\frac{4p}{q}\right) \]
+ 			
+ 		    \textbf{Axiom}: \textit{Given p is an integer, np is also integer where n $\in$ Z} 
+ 		    
+ 		    Thus, 
+ 			
+ 			\[ r = \left(\frac{m}{q}\right) \]
+ 			
+ 			where $m = 4 \cdot p$, is rational. The claim is correct. \cmark
+ 			
+			\item \textbf{Claim:} For all natural numbers $n$, $10n^2 > n!$.
+			
+			\textbf{Proof:} \textit{by Counterexample}
+			
+			Let $P(n)$ be the proposition $10n^2 > n!$ where $n \in N$. We could simply iterate through a couple of elements in $N$ until we find a $n \in N$ for which $P(n)$ doesn't hold. \\
+			
+
+		\begin{enumerate}
+		
+			\item	$P(1) = (10 > 1)$ \cmark 
+			\item	$P(2) = (40 > 2)$ \cmark 
+			\item	$P(3) = (90 > 6)$ \cmark 
+			\item	$P(4) = (160 > 24)$ \cmark 
+			\item	$P(5) = (250 > 120)$ \cmark 
+			\item	$P(6) = (360 > 720)$ \xmark 
+		
+		\end{enumerate}	
+			
+			At $n = 6$, we have a counterexample to the claim $P(n)$. Thus the claim is incorrect. \xmark
+			
+		\end{enumerate}
+		
+		\newpage
+		\item Interesting Induction
+		
+		\begin{enumerate}
+			\item
+			For $n \in N$ with $n\ge 2$, define $s_n$ by
+			\[ s_n = \left(1 - \frac{1}{2}\right) \times \left(1 - \frac{1}{3}\right) \times \dots
+			\times \left(1 - \frac{1}{n}\right). \]
+			
+			\textbf{Claim:} $s_n = 1/n$ for every natural number $n\ge 2$.
+			
+			\textbf{Proof:}  \textit{by Induction}
+			
+			Given \[ s_n = \left(1 - \frac{1}{2}\right) \times \left(1 - \frac{1}{3}\right) \times \dots
+			\times \left(1 - \frac{1}{n}\right). \]
+			
+			\textbf{Base Case:} 
+						
+			\[ s_2 =  \left(1 - \frac{1}{2}\right) = \left(\frac{1}{2}\right) \text{ \cmark}\]
+				
+			\textbf{Inductive Step:}
+			
+			Assume $s_n$ to be true. 
+			
+			\[ s_{n+1} = \left(1 - \frac{1}{2}\right) \times \left(1 - \frac{1}{3}\right) \times \dots
+			\times \left(1 - \frac{1}{n}\right) \times \left(1 - \frac{1}{n+1}\right). \]
+			
+			\[ s_{n+1} = \left(\frac{1}{2}\right) \times \left(\frac{2}{3}\right) \times \dots
+			\times \left(\frac{n - 1}{n}\right) \times \left(\frac{n}{n+1}\right). \]
+			
+			\[ s_{n+1} = \left(\frac{1 \cdot 2 \cdots (n-1) \cdot n}{2 \cdot 3 \cdots n \cdot (n+1)}\right). \]			
+			
+			\[ s_{n+1} = \left(\frac{n!}{(n+1)!}\right)  
+			\]
+			
+			\[ s_{n+1} = \left(\frac{1}{n} \right) \text{\cmark}
+			\]
+			
+			The claim is correct. \cmark.
+			
+			\item
+			Let $a_n = 3^{n+2} + 4^{2n+1}$.
+			\textbf{Claim:} 13 divides $a_n$ for every $n \in N$.
+			
+			\textbf{Proof:} \textit{by Induction}
+			
+			Given $$a_n = 3^{n+2} + 4^{2n+1}$$
+			
+			\textbf{Base Case}:
+			$$a_0 = 3^{2} + 4 = 13$$
+			$$13 \vert a_0 = 13 \vert 13 \text{ \cmark}$$
+			
+			\textbf{Inductive Step}:
+			Assume $a_n$ to be true. 
+			
+			$$a_{n+1} = 3^{n+3} + 4^{2n+3}$$
+			
+			Using the Hint
+			
+			$$a_{n+1} - 3a_{n} = (3^{n+3} + 4^{2n+3}) - (3^{n+2} + 4^{2n+1})$$
+			\\ After solving algebraically 
+			$$a_{n+1} - 3a_{n} = 52 \cdot 4^{2n}$$			
+			
+			$$13 \vert (a_{n+1} - 3a_{n}) = 13 \vert 52 \cdot 4^{2n} \text{ \cmark}$$
+			
+			This means that 
+			$$(13 \vert a_{n+1}) - (13 \vert 3a_{n})$$ is true. Which tells us that $13 \vert a_{n+1}$ is true. \cmark
+			
+			
+		\end{enumerate}
+		
+		\newpage
+		\item Proofs, Perhaps
+		
+		\begin{enumerate}
+			
+			\item This claim is false, and the proof is incorrect. The problem lies in the inductive step. The inductive hypothesis is $$P(k) = (k^2 < k)$$ In Mathematical Induction, you assume $P(k)$ is true and prove that $P(k+1)$ is true, and therefore prove that $$P(k) \rightarrow P(k+1)$$ is true $\forall k \in D$ where $D$ is some domain. However in this proof, you prove something(the inductive hypothesis) that you already had assumed to be true, which is incorrect. 
+			\item This claim is false, and the proof is incorrect. In the Inductive step, you have $$7^{k+1} = (7^k \cdot 7^k) / 7^{k-1}$$ However, when k = 0
+			 
+			$$7^1 = (7^0 \cdot 7^0) / 7^{-1}$$ 
+			
+			The claim only holds for $k \in N$, and $-1 \notin N$. Therefore, you can't substitute $1$ in its place, and the proof breaks. 
+			 
+			\item This claim is correct, and so is the proof. 
+			\item This claim is false, and the proof is incorrect. The problem is in the claim that 
+			$$ max\text[(a - 1),(b - 1)] = n$$ because this doesn't hold hold for $a = b = 0$ because $-1 \notin N$. 
+		\end{enumerate}
+		
+		\newpage
+		\item Take the Tokens
+		
+		\textbf{Claim:} For all natural numbers \(k\), if the pile starts with \(4k +
+		1\) tokens, then Thuc has a winning strategy.
+		
+		\textbf{Proof:}  \textit{by Induction}
+		
+		Let $P(k) = 4k + 1 \tab \forall k \in N$
+		
+		\textbf{Base Case:} 
+		
+		$$P(0) = 4(0) + 1 = 1$$
+		
+		If there's only 1 token, then Tamara will end up picking it firstly, and thus Thuc wins. \\
+		
+		\textbf{Inductive Step:}
+		
+		Assume $P(k)$ is true. Taking $P(k+1)$
+		
+		$$P(k+1) = 4(k+1) + 1$$  
+		$$P(k+1) = (4k + 1) + 4$$ 
+		$$P(k+1) = P(k) + 4$$
+		
+		Tamara has to go first, and can pick up either 1, 2 or 3 tiles. Thus, Thuc can afterwards pick 
+		$$4 - \textit{No of tiles Tamara picked}$$ to get the number of tiles in the form of $P(k) = 4k + 1$, under which condition Thuc knows he will win. \cmark
+		
+		
+		\newpage
+		\item Rigorous Recursion
+		
+		\textbf{Claim:} For all inputs $n\in\mathbf{N}$, the value returned by the program is $G(n)=3^n-2^n$.
+		
+		\textbf{Proof:} \textit{by Induction}
+		
+		Given $G(n) = 3^n - 2^n$
+		
+		\textbf{Base Case}:
+			\begin{enumerate}
+				\item \textit{if (n = 0)}
+					$$G(0) = 3^0 - 2^0 = 0 \text{ \cmark}$$  
+				\item \textit{if (n = 1)}
+					$$G(1) = 3^1 - 2^1 = 1 \text{ \cmark}$$ 
+			
+			\end{enumerate}
+			
+		
+			\textbf{Inductive Step}:
+			Assume G(k) is true $\forall 0 \le k \le i$. Solving for $G(k+1)$ 
+					$$5G(k + 1 - 1) - 6G(k + 1 - 2) = 5G(k) - 6G(k - 1)$$
+					$$= 5(3^{k} - 2^{k}) - 6(3^{k-1} - 2^{k-1})$$ 
+					After algrebic manipulation
+					$$ = 3^{k+1} - 2^{k+1} \text{ \cmark } $$
+					
+			
+		
+		
+		
+		\newpage
+		\item Coloring Countries (Some of the content here including pictures has been taken from \url{http://mathonline.wikidot.com/6-colour-theorem-for-planar-graphs})
+		
+		\begin{enumerate}
+			
+			\item
+			\textbf{Theorem:}
+			
+			Every possible map can be colored with six colors, in such a way that no
+			two neighboring countries have the same color.
+			
+			\textbf{Proof:} \textit{by Induction} \\
+			Let $P(n)$ be the statement that the vertices in a planar graph can be coloured with 6 colors. 
+			
+			\textbf{Base Case:} \\
+			For $1 \le n \le 6$, $P(n)$ is correct because you can give each and every vertex a different color than its neighbor. 
+			
+			\textbf{Inductive Step:} \\
+			Assume that $P(n)$ is true, which means that if we have a planar graph with $n$ vertices, we can obtain a good coloring. We want to prove that if we have $n+1$ vertices, the coloring is still possible. 
+			
+			Now, assume $G$ is a planar graph with $n + 1$ vertices. The lemma tells us that the degree of the vertex $ \le 5$. Therefore, we would have a graph as shown in the figure below.
+			
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{a.png}
+			
+			If we remove the vertex $v$, the number of vertices become $n$, for which we know that good coloring is possible, as in the following figure . 
+
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{b.png}
+
+			Adding the vertex $v$ back, the figure becomes
+
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{c.png}
+			
+		Thus, a good coloring is possible. So $P(n+1)$ is true. \cmark
+			
+		\end{enumerate}
+		
+	\end{enumerate}
+\end{document}
