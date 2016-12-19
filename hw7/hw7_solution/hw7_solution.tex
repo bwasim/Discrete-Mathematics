@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\usepackage{amsthm}% http://ctan.org/pkg/amsthm
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xypic}
+\usepackage{caption}
+\usepackage{hyperref} 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=c++,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\hypersetup{
+	colorlinks   = true,
+	citecolor    = gray
+}
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+%%% - The heading
+\title{CS70--Fall 2011 --- Solutions to Homework 7}
+\pagestyle{myheadings}
+
+%%% - Don't show the Date
+\date{}
+%%% - Don't show the Page numbers
+\pagenumbering{gobble}
+
+\begin{document}
+	\maketitle
+
+	%%% Enumeration for the Questions
+	\begin{enumerate}
+		
+		%%% Q1
+		\item \textbf{Sample Space and Events}
+			
+			%%% Parts of Q1
+			\begin{enumerate}
+				\item $\Omega$ has $16$ total outcomes. \\ 
+				HHHH, HTHH, THHH, TTHH,	HHHT, HTHT, THHT, TTHT, \\
+				HHTH, HTTH, THTH, TTTH, HHTT, HTTT, THTT, TTTT
+				\item A has $8$ possible outcomes. \\
+				HHHH, HTHH, HHHT, HTHT, HHTH, HTTH, HHTT, HTTT
+				\item B has $8$ possible outcomes. \\
+				HHHH, HTHH, THHH, TTHH, HHHT, HTHT, THHT, TTHT
+				\item C has $4$ possible outcomes. \\
+				HHHH, HTHH, HHHT, HTHT
+				\item D has $12$ possible outcomes. \\
+				HHHH, HTHH, THHH, TTHH, HHHT, HTHT 
+				THHT, TTHT, HHTH, HTTH, HHTT, HTTT
+				\item Like you can see from the outcomes, A and B are not disjoint. The relationships are \\
+					\begin{center}
+						C = A \textbf{AND} B \\
+						D = A \textbf{OR} B
+					\end{center}
+				\item I leave the details of this up to you. 
+					\begin{center}
+						$$\vert \Omega \vert = 2^n$$
+						$$\vert A \vert = 2^{n-1}$$
+						$$\vert B \vert = 2^{n-1}$$
+						$$\vert C \vert = 2^{n-2}$$
+						$$\vert D \vert = 2^n - 2^{n-2}$$
+					\end{center} 
+				\item $\frac{2}{3}$. If you see carefully, this problem is essentially the Monty Hall problem in disguise. \\
+				An outcome consists of us selecting a coin, and then choosing one of its sides. Since there are $3$ coins
+				each with $2$ sides, our sample space $\Omega$ has $6$ elements
+				$$\Omega = \left\{(HH,H1),(HH,H2),(HT,H),(HT,T),(TT,T1),(TT,T2)\right\}$$
+				where $(HH,H1)$ refers to the outcome of drawing the coin with two heads and of looking at the first
+				side. Similarly, $(HH,H2)$ refers to the outcome of choosing the coin with two heads and of looking at
+				the second side, $(HT,T)$ refers to the outcome of choosing the coin with both heads and tails and of
+				looking at the tails side, etc. Let A be the event that we choose the HH coin, and let B be the event
+				that we see a heads when we put the coin down on the table. We wish to compute $Pr[A \vert B]$. Since
+				$A = {(HH,H1),(HH,H2)}$, $B = {(HH,H1),(HH,H2),(HT,H)}$, and A $\cap$ B = A, we see
+				$$Pr[A \vert B] = \frac{Pr[A]}{Pr[B]} = \frac{2}{3} $$
+
+				
+			\end{enumerate}
+		
+		%%% Q2
+		\item \textbf{Monty Hall Revisited} \\
+		\textbf{Solution}: $\frac{2}{3}$. Consider three doors. Each of these doors has a probability of $\frac{1}{3}$ of having the prize, because they are independent from one another. Lets call them A, B and C. So, 
+					$$P(A) = P(B) = P(C) = \frac{1}{3}$$
+		Suppose you select one of these doors, say A. As mentioned, the probability that A has the prize is mere $\frac{1}{3}$. Therefore, the probability that the prize is in B or C(not in A is $\frac{2}{3}$. Now the host opens either B or C, if it doesnot have the prize. Suppose he opens B. Now because B doesnot have the prize, the 
+							$$P(B) = 0$$
+		but we already know that 
+							$$P(A) = \frac{1}{3}$$ 
+		because total probability has to be 1. Thus, 
+							$$P(C) = \frac{2}{3}$$
+		\textbf{Note: } For more explanation, please refer to \href{https://www.youtube.com/watch?v=4Lb-6rxZxx0}{This} and \href{http://www.archive.org/download/MIT6.042JF10/MIT6_042JF10_lec18_300k.mp4}{This} for more elaborate explanation. 
+		
+		%%% Q3
+		\item \textbf{Rolling Dice}
+			
+			The details are left to you. These are pretty straight forward problems btw. 
+			%%% Parts of Q3
+			\begin{enumerate}
+				\item $\frac{1}{6}$
+				\item $\frac{1}{3}$
+				\item $\frac{11}{36}$
+				\item $\frac{1}{3}$
+			\end{enumerate}
+		
+		
+	\end{enumerate}
+	
+\end{document}
