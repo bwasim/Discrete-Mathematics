@@ -1,0 +1,172 @@
+\documentclass[11pt]{article}
+\usepackage{amsthm}% http://ctan.org/pkg/amsthm
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xypic}
+\usepackage{caption}
+\usepackage{hyperref} 
+\usepackage{listings}
+\usepackage{color}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=c++,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\hypersetup{
+	colorlinks   = true,
+	citecolor    = gray
+}
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+%%% - The heading
+\title{CS70--Fall 2011 --- Solutions to Homework 8}
+\pagestyle{myheadings}
+
+%%% - Don't show the Date
+\date{}
+%%% - Don't show the Page numbers
+\pagenumbering{gobble}
+
+\begin{document}
+	\maketitle
+
+	%%% enum for Questions 
+	\begin{enumerate}
+		
+		%%% Q1
+		\item \textbf{Marbles}
+			
+			%%% enum for Q1
+			\begin{enumerate}
+				\item Let BL be the event that we get a black marble. Therefore the probability that B happens is, \\	
+				\begin{center}
+P(BL) = $\frac{1}{2} \cdot ( \frac{1}{4} + \frac{2}{6} ) = \frac{7}{24}$
+				\end{center}	 
+				
+				\item Let A be the event that we select Box A, and B be the event that we select Box B. Also let W be the event that we get a white marble. So, probability of W is 
+				$$P(W) = 1 - P(BL) = \frac{17}{24}$$
+				As, 
+				$$P(W) \cdot P(A | W) = P(A) \cdot P(W | A)$$
+				$$P(A | W) = \frac{P(A) \cdot P(W | A)}{ P(W) } = \frac{9}{17}$$
+				
+				This is the probability that given a white marble, it is from Box A. 
+			\end{enumerate}
+			
+		%%% Q2
+		\item \textbf{Find the Probabilities}
+			
+			%%% finding A AND B
+			Note that $P(A \cap B) = P(B) \cdot P(A | B) = P(A) \cdot P(B | A) = \frac{1}{10}$
+			
+			%%% enum for Q2
+			\begin{enumerate}
+				\item $P(B) = \frac{1}{4}$
+				\item $P(A \cup B) = P(A) + P(B) - P(A \cap B) = \frac{11}{20}$
+				\item No, as P(A) $\cdot$ P(B) $\neq$ P(A $\cap$ B)
+				\item No, as P(A $\cap$ B) $\neq$ 0
+			\end{enumerate}
+			
+		%%% Q3
+		\item \textbf{Count the Square-Frees}
+		
+		We compute the number of positive integers strictly less than $201$ that are not square-free. Let $A_2$
+		(respectively, $A_3, A_5, A_7, A_{11}, A_{13}$) be the set of multiples of $22$ (respectively, $32, 52, 72, 112, 132$) less than
+		$201$. The union of these sets in the set of all numbers less than $201$ which are not square-free, i.e., have
+		some square divisor in them. (Why only primes? Why stop at $13$?). \\
+		The cardinality of this set can be computed by the Inclusion-Exclusion Principle. Since $2^2 \cdot 11^2 \ge 201$ and
+		$3^2 \cdot 5^2 \ge 201$, it follows that $A_i \cap A_j = \emptyset $ unless $ \left\{ i, j \right\} = \left\{ 2, 3 \right\}, \left\{ 2, 5 \right\}, or \left\{ 2, 7 \right\}$. Since $2^2 \cdot 3^3 \cdot 5^2 \ge 201$, it follows
+		that $A_i \cap A_j \cap A_k = \emptyset$ $\forall i, j, k$. So: \\
+		
+		$\vert A_2 \cup A_3 \cup A_5 \cup A_7 \cup A_{11} \cup A_{13}\vert
+		= \vert A_2 \vert + \vert A_3 \vert + \vert A_5 \vert + \vert A_7 \vert + \vert A_{11} \vert + \vert A_{13} \vert - \vert A_2 \cap A_3 \vert -  \vert A_2 \cap A_5 \vert - \vert A_2 \cap A_7 \vert $
+		
+		$=  \floor*{\frac{200}{2^2}} + \floor*{\frac{200}{3^2}} + \floor*{\frac{200}{5^2}} + \floor*{\frac{200}{7^2}} + \floor*{\frac{200}{11^2}} + \floor*{\frac{200}{13^2}} - \floor*{\frac{200}{2^2 \cdot 3^2}} - \floor*{\frac{200}{2^2 \cdot 5^2}} - \floor*{\frac{200}{2^2 \cdot 7^2}} $
+		
+		$= 50 +22 +8 +4 +1 +1 - 5 - 2 - 1 = 78$
+		
+		Therefore, the number of square-free positive integers strictly less than $201$ is $200 - 78 = 122$
+		
+		%%% Q4
+		\item \textbf{Independence}
+			
+			%%% enum for Q4
+			\begin{enumerate}
+				\item True. A and B must be independent. \\\\
+				$P(\overline{A} \cap \overline{B}) = P(\overline{A \cup B})$ \\\\
+				$= 1 - P(A \cap B) = 1 - (P(A) + P(B) - P(A \cap B))$ \\\\
+				$= 1 - P(A) - P(B) + P(A) \cdot P(B)$\\\\
+				$= (1 - P(A)) \cdot (1 - P(B)) = P(\overline{A}) \cdot P(\overline{B}) $ \\
+				
+				
+				\item True. A and $\overline{B}$ must be independent. \\\\
+				$P(A \cap \overline{B}) = P(A - (A \cap B))$ \\\\
+				$= P(A) - P(A \cap B) = P(A) - P(A) \cdot P(B)$ \\\\
+				$= P(A) \cdot (1 - P(B)) = P(A) \cdot P(\overline{B})$ \\
+				
+				\item False in general. If $0 < P(A) < 1$, then $P(A \cap \overline{A}) = 0$ but $P(A) \cdot P(\overline{A}) > 0$, so $P(A \cap \overline{A}) \neq P(A) \cdot P(\overline{A})$ therefore $A$ and $\overline{A}$ are not independent in this case. \\
+				
+				
+				\item True. To give one example, if $P(A) = P(B) = 0$, then $P(A \cap B) = 0 = 0 \text{ x } 0 = P(A) \cdot P(B)$,
+				so A and B are independent in this case. \\
+				
+				
+			\end{enumerate}
+		
+		
+		%%% Q5
+		\item \textbf{Conditional Independence}
+			
+			%%% enum for Q5
+			\begin{enumerate}
+				
+				\item $C = A \cap B$
+				
+				\item Given that C is the event that Alekh plays volleyball, with A being the event that he has no homework and B being the event that the weather is nice. \\
+				Note that Alekh only plays volleyball when the weather is nice. So $P(B \vert C) = 1$. Another way to look at this is,  \\
+				\begin{center}
+					$P(B \vert C) = \frac{ P(B \cap C) }{P(C)} = \frac{P(C)}{P(C)} = 1$ 
+				\end{center}
+				
+				\item A and B are conditionally independent given C, since $P(A \cap C) = P(A \vert C) = P(B \vert C) = 1$. On the
+				other hand, A and B are not conditionally independent given $\overline{C}$: $P(A \cap C \vert \overline{C}) = 0$, but $P(A \vert \overline{C}) = P(A \cap \overline{B})/P(\overline{C})$ and $P[B \vert \overline{C}]$ are both nonzero, so $P(A \cdot \overline{C}) \cdot P(B \vert \overline{C}) \neq 0$.
+				
+			\end{enumerate}
+		
+	\end{enumerate}
+
+
+\end{document}
